@@ -161,7 +161,15 @@
     function locationHashChanged(e) {
       e.preventDefault();
       alert(e);
-      window.location = new URL(e.oldURL, e.newURL).href;
+// Always prefix with /CK-Bypass/ if not already present
+const repoBase = "/CK-Bypass";
+let target = e.newURL;
+if (!target.startsWith(repoBase)) {
+  // Remove domain if present and ensure slash placement
+  const urlObj = new URL(target, window.location.origin);
+  target = repoBase + urlObj.pathname.replace(/^\/?CK-Bypass/, "");
+}
+window.location = target;
     }
     window.onhashchange = locationHashChanged;
   };
