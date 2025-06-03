@@ -4,7 +4,19 @@
 
   <body bgcolor="#000000">
   
-  <embed src="run-3.swf" quality="high" pluginspage="http://www.macromedia.com/go/getfashplayer" type="application/x-shockwave-flash" width="800" height="640">
-
+<div id="container"></div>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script>
+window.RufflePlayer = window.RufflePlayer || {};
+window.addEventListener("load", (event) => {
+  const ruffle = window.RufflePlayer.newest();
+  const player = ruffle.createPlayer();
+  const container = document.getElementById("container");
+  container.appendChild(player);
+  player.load({ url: "example.swf", backgroundColor: "#000" });
+  player.style.width = "450px";
+  player.style.height = "450px";
+});
+</script>
 </body>
 </html>
